@@ -1,0 +1,65 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+        <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+        <script src="{% static 'jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.js'%}"></script>
+
+</head>
+<body>
+<div class="container">
+<h2 class=" row text-center" >Login to enter into Inventory Management Application</h2>
+
+<button class="text-center" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+</div>
+<div id="id01" class="modal">
+
+  <form id="sign_in" class="modal-content animate" method="POST" autocomplete="off" action="api/v1/login">{% csrf_token %}
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="http://blog.cointribe.com/wp-content/uploads/2016/06/CoinTribeLogo.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label><b>Username</b></label>
+      <input type="text" id="id_username" placeholder="Enter Username" name="email" required>
+
+      <label><b>Password</b></label>
+      <input type="password" id="id_password" placeholder="Enter Password" name="password" required>
+        <input type="hidden" name="redirect_url" value="http://localhost:8000/api/v1/inventory" required>
+        <div id="signin_error" class="error" style="display: none;color: red;text-align: center;"></div>
+      <button type="submit">Login</button>
+      <label>
+        <input type="checkbox" checked="checked"> Remember me
+      </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<script>
+$(document).ready(function(){
+        initHeaderSigninForm();
+    });
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
